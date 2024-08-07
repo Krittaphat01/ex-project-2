@@ -1,0 +1,91 @@
+@hostname = 127.0.0.1
+@port = 9000
+@serverUrl = http://{{hostname}}:{{port}}
+@baseUrl = http://{{hostname}}:{{port}}
+
+
+###
+GET {{baseUrl}}/cart
+
+###
+POST {{baseUrl}}/user/signup
+Content-Type: application/json
+
+{
+    "username" : "Ganui",
+    "password" : "password123"
+}
+
+###
+POST {{baseUrl}}/auth/signin
+Content-Type: application/x-www-form-urlencoded
+
+username=Ganui&password=password123
+
+###
+POST {{baseUrl}}/auth/acesstoken
+Content-Type: application/x-www-form-urlencoded
+
+username=Bard&password=password123
+
+###
+POST {{baseUrl}}/auth/profile
+Content-Type: application/x-www-form-urlencoded
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdhbnVpIiwic3ViIjo1LCJpYXQiOjE3MDgxNzM0MDUsImV4cCI6MTcwODE3NzAwNX0.h65Rih-XhOQdRf_30muERdhy1nOj0-bowfEp6_anygE
+
+username=Ganui&password=password123
+
+###
+POST {{baseUrl}}/cart
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkdhbnVpIiwic3ViIjo1LCJpYXQiOjE3MDgxNzM0MDUsImV4cCI6MTcwODE3NzAwNX0.h65Rih-XhOQdRf_30muERdhy1nOj0-bowfEp6_anygE
+
+{   
+    "FandLname" : "John Doe",
+    "addr" : "moon",
+    "phone" : "0979858786",
+    "deliveryDate" : "July 20, 69 00:20:18",
+    "status" : "unpaid",
+    "cartPrice" : "550",
+    "payment": {
+        "paymentType" : "Transfer"
+    },
+    "service": {
+        "serviceName" : "Wash",
+        "servicePrice" : "450"
+    }
+}
+
+###
+POST {{baseUrl}}/payment
+Content-Type: application/json
+
+{
+    "paymentType" : "Cash"
+}
+
+###
+PUT {{baseUrl}}/payment/2
+Content-Type: application/json
+
+{   "paymentID" : 2,
+    "paymentType" : "Transfer"
+}
+
+###
+POST {{baseUrl}}/service
+Content-Type: application/json
+
+{
+    "serviceName" : "Wash",
+    "servicePrice" : "450"
+}
+
+###
+DELETE {{baseUrl}}/cart/2
+
+###
+DELETE {{baseUrl}}/payment/1
+
+###
+DELETE {{baseUrl}}/service/1
